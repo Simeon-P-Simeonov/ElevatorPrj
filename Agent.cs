@@ -37,7 +37,7 @@ namespace ElevatorProject
         private void Leave()
         {
             writer.WriteLine(name + " is out of the Elevator!");
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             current_floor = _elevator.currentFloor;
             semaphore.Release();
         }
@@ -46,37 +46,37 @@ namespace ElevatorProject
             var chosenFloor = ChooseRandomButton();
             writer.WriteLine($"{name} wants to go to floor {chosenFloor}.");
             _elevator.Move(chosenFloor);
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             _elevator.AgentInElevator(chosenFloor);
         }
         private void Enter()
         {
             writer.WriteLine(name + " is waiting for the elevator.");
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             semaphore.WaitOne();
             writer.WriteLine(name + $" called the elevator from {current_floor}.");
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             _elevator.Move(current_floor);
             _elevator.Enter(this);
             writer.WriteLine(name + " entered the elevator.");
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             do
             {
                 insideElevatorRoutine();
             } while (!_elevator.canPass);
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
         }
 
         private void DailyRoutine()
         {
             writer.WriteLine(name + " enters the building.");
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             while (workDone < 100)
             {
                 Enter();
                 Leave();
                 writer.WriteLine(name + " is working!");
-                //Thread.Sleep(5000);
+                Thread.Sleep(5000);
                 workDone += new Random().Next(5, 30);
                 if (workDone > 100) workDone = 100;
                 writer.Write($"{name} has done {workDone}% of their work.\n");
@@ -86,21 +86,21 @@ namespace ElevatorProject
         private void GoHomeRoutine()
         {
             writer.WriteLine($"{name}'s working day is over!");
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             if (current_floor != Floor.G)
             {
                 writer.WriteLine($"{name} is waiting for the elevator.");
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 semaphore.WaitOne();
                 writer.WriteLine($"{name} called the elevator from {current_floor}.");
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 _elevator.Move(current_floor);
                 _elevator.Enter(this);
                 writer.WriteLine($"{name} entered the elevator.");
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 writer.WriteLine($"{name} wants to go to floor G.");
                 _elevator.Move(Floor.G);
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 _elevator.AgentInElevator(Floor.G);
             }
             writer.WriteLine($"{name} is leaving the building!");
