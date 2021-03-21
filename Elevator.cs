@@ -47,7 +47,7 @@ namespace ElevatorProject
             if (dest.Equals(currentFloor))
             {
                 writer.WriteLine("Elevator is already here.");
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 canPass = true;
             }
             else
@@ -56,23 +56,23 @@ namespace ElevatorProject
                 {
                     canPass = false;
                     writer.WriteLine("Elevator is going down.");
-                    //Thread.Sleep(1000);
+                    Thread.Sleep(1000);
                 }
                 else
                 {
                     canPass = false;
                     writer.WriteLine("Elevator is going up.");
-                    //Thread.Sleep(1000);
+                    Thread.Sleep(1000);
 
                 }
                 for (int i = 0; i < Math.Abs(currentFloor - dest); i++)
                 {
                     writer.WriteLine($"\t{i + 1} second(s) have passed!");
-                    //Thread.Sleep(1000);
+                    Thread.Sleep(1000);
                 }
                 currentFloor = dest;
                 writer.WriteLine("Elevator is at " + dest);
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 canPass = true;
             }
 
@@ -91,7 +91,7 @@ namespace ElevatorProject
             {
                 currentFloor = floor;
                 writer.WriteLine($"Agent of type {_agent.type} cannot enter floor {floor}");
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
             }
         }
     }
